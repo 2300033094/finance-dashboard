@@ -1,70 +1,203 @@
-# Getting Started with Create React App
+# ZorvFin — Finance Dashboard UI
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> Frontend Developer Intern Assignment — Zorvyn FinTech Pvt. Ltd.
 
-## Available Scripts
+A clean, interactive, and fully responsive finance dashboard built with **React** and **Recharts**. The application delivers a modern fintech-style user experience with role-based UI, interactive charts, advanced filtering, theme persistence, export functionality, and insightful financial summaries powered by realistic mock transaction data [file:1].
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## Live Demo / Repository
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Live Demo**: https://zorvfin-financedashboard.netlify.app/
+- **GitHub Repository**: https://github.com/2300033094/finance-dashboard
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+| Concern | Choice | Reason |
+|---|---|---|
+| Framework | React (Create React App) | Component-based architecture with a simple and reliable setup [file:1] |
+| Charts | Recharts | Flexible charting library that integrates smoothly with React components [file:1] |
+| Styling | Inline styles + embedded style tag | Complete UI control with theme-based styling [file:1] |
+| State Management | React Context + Hooks | Centralized and lightweight state handling for the full dashboard [file:1] |
+| Persistence | `localStorage` | Preserves theme, role, and transaction data across sessions [file:1] |
+| Data | Seeded mock transactions | Provides realistic visuals and insights from the first launch [file:1] |
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Features
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Dashboard Overview
+- Summary cards for **Total Balance**, **Total Income**, **Total Expenses**, and **Savings Rate** [file:1]
+- **Balance Trend** line chart for month-by-month movement [file:1]
+- **Spending by Category** donut chart with color-coded legend [file:1]
+- **Recent Transactions** table for quick review [file:1]
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Transactions Section
+- Complete transactions table with:
+  - Date
+  - Description
+  - Category
+  - Type
+  - Amount [file:1]
+- Live **search** across description and category [file:1]
+- Filter by **type**, **category**, and **date range** [file:1]
+- Sort by **newest**, **oldest**, **highest amount**, and **lowest amount** [file:1]
+- **Clear Filters** option for quick reset [file:1]
 
-### `npm run eject`
+### Role-Based UI
+- `Admin` mode supports adding, editing, and deleting transactions [file:1]
+- `Viewer` mode supports read-only access with full dashboard visibility [file:1]
+- Role switching is available directly from the top bar [file:1]
+- Selected role is saved and restored automatically using `localStorage` [file:1]
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Insights Section
+- Savings rate with target comparison [file:1]
+- Top spending category overview [file:1]
+- Average monthly expense calculation [file:1]
+- Net savings summary [file:1]
+- Monthly income vs expense bar chart [file:1]
+- Category-wise breakdown with progress indicators [file:1]
+- Month-over-month comparison for income, expenses, and savings [file:1]
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### UI/UX Enhancements
+- Dark / Light mode toggle with persistence [file:1]
+- Responsive layout for mobile, tablet, and desktop screens [file:1]
+- Add/Edit transaction modal with validation [file:1]
+- CSV and JSON export support [file:1]
+- Smooth hover states and subtle transition effects [file:1]
+- Clear empty states for transactions and charts [file:1]
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Role Permissions
 
-## Learn More
+| Feature | Admin | Viewer |
+|---|---|---|
+| View dashboard data | ✅ | ✅ |
+| Add transaction | ✅ | ❌ |
+| Edit transaction | ✅ | ❌ |
+| Delete transaction | ✅ | ❌ |
+| Export CSV / JSON | ✅ | ✅ |
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+This role behavior is implemented as a frontend UI simulation to demonstrate conditional rendering and permission-aware interactions [file:1].
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
 
-### Code Splitting
+## State Management
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The app uses a centralized `AppContext` to manage dashboard-wide state and actions [file:1].
 
-### Analyzing the Bundle Size
+```text
+AppContext
+├── transactions     — master transaction list
+├── filters          — search, type, category, date range, sort
+├── role             — admin / viewer
+├── dark             — theme mode
+└── activeTab        — current selected dashboard tab
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Implementation highlights:
+- `useMemo` powers derived calculations such as totals, chart data, category summaries, and filtered results [file:1]
+- `useCallback` is used for add, edit, delete, and export actions [file:1]
+- `localStorage` preserves theme, role, and transaction data between sessions [file:1]
 
-### Making a Progressive Web App
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Project Structure
 
-### Advanced Configuration
+```text
+src/
+├── App.js   — Main finance dashboard application
+└── index.js — React entry point
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+The dashboard is intentionally built in a compact, review-friendly structure so the full implementation can be understood quickly during assessment [file:1].
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Setup & Run
 
-### `npm run build` fails to minify
+### Prerequisites
+- Node.js
+- npm
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Installation
+
+```bash
+git clone https://github.com/2300033094/finance-dashboard
+cd finance-dashboard
+npm install
+npm install recharts
+```
+
+### Run Locally
+
+```bash
+npm start
+```
+
+The app will run locally at:
+
+```text
+http://localhost:3000
+```
+
+### Production Build
+
+```bash
+npm run build
+```
+
+This generates the production-ready files in the `build` folder for deployment [file:1].
+
+---
+
+## Design Decisions
+
+1. **React Context for app-wide state**  
+   A centralized context keeps shared state organized and easy to manage across tabs and components [file:1].
+
+2. **Memoized derived calculations**  
+   Financial summaries, filters, monthly trends, and chart datasets are computed efficiently with `useMemo` [file:1].
+
+3. **Seeded mock transaction data**  
+   Realistic sample transactions provide immediate chart output, category analysis, and meaningful insights [file:1].
+
+4. **Role-aware UI behavior**  
+   Admin and Viewer modes clearly demonstrate permission-based rendering in a frontend-only environment [file:1].
+
+5. **Themed visual system**  
+   The dashboard supports both dark and light themes with a consistent color system across cards, tables, charts, and actions [file:1].
+
+---
+
+## Highlights
+
+- Interactive **finance dashboard** experience [file:1]
+- Modern **chart-driven** data presentation [file:1]
+- Strong **UI responsiveness** across devices [file:1]
+- Frontend-only **role-based access behavior** [file:1]
+- Built-in **CSV/JSON export** tools [file:1]
+- Smooth **dark/light mode persistence** [file:1]
+
+---
+
+## Deployment
+
+This project is successfully deployed on Netlify:
+
+- **Live Demo**: https://zorvfin-financedashboard.netlify.app/
+
+---
+
+## Repository
+
+Source code is available on GitHub:
+
+- **GitHub Repository**: https://github.com/2300033094/finance-dashboard
+
+---
+
+Built for **Zorvyn FinTech Pvt. Ltd.** as part of the **Frontend Developer Intern Screening Assignment**.
